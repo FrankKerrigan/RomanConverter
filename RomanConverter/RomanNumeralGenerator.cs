@@ -37,7 +37,7 @@ namespace RomanConverter
             catch (Exception ex)
             {
                 //Replace with Logging framework
-                Console.WriteLine($"{DateTime.Now.ToString(CultureInfo.InvariantCulture)}  Exception in RomanNumeralGenerator.Generate for number {number}  Error: {ex.Message}  Stack:  {ex.StackTrace}  ");
+                //Console.WriteLine($"{DateTime.Now.ToString(CultureInfo.InvariantCulture)}  Exception in RomanNumeralGenerator.Generate for number {number}  Error: {ex.Message}  Stack:  {ex.StackTrace}  ");
                 throw;
             }
         }

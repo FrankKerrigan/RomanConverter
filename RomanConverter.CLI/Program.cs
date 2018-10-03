@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using RomanConverter;
 
 namespace RomanConverter.CLI
 {
@@ -9,26 +7,34 @@ namespace RomanConverter.CLI
     {
         static void Main(string[] args)
         {
-            var  parse = parseArgs(args);
 
-            if (parse.HasError)
+            try
             {
-                Console.WriteLine($"Arguements are not valid: {parse.ExceptionMessage}");
-                return;
+                var parse = ParseArgs(args);
+
+                if (parse.HasError)
+                {
+                    Console.WriteLine($"Arguements are not valid: {parse.ExceptionMessage}");
+                    return;
+                }
+
+                RomanNumeralGenerator generator = new RomanNumeralGenerator();
+                var inRomanNums = generator.Generate(parse.ParsedInt);
+
+                Console.WriteLine($"{parse.ParsedInt} in Roman Numerals is {inRomanNums}");
+
             }
-
-            RomanNumeralGenerator generator = new RomanNumeralGenerator();
-            var inRomanNums = generator.Generate(parse.ParsedInt);
-
-            Console.WriteLine($"{parse.ParsedInt} in Roman Numerals is {inRomanNums}");
-
-
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                
+            }
         }
 
 
-        
 
-        static ParseMessage parseArgs(string[] args)
+
+        static ParseMessage ParseArgs(string[] args)
         {
             var result = new ParseMessage();
 
@@ -43,6 +49,7 @@ namespace RomanConverter.CLI
                 }
 
                 result.HasError = !int.TryParse(args[0], out var parsednumber);
+                result.ParsedInt = parsednumber;
                 result.ExceptionMessage = result.HasError ? "Parse Error" : string.Empty;
             }
             catch (Exception ex)
