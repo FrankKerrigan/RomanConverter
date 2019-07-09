@@ -44,5 +44,17 @@ namespace RomanConverterTests
             //Assert Exception
         }
 
+
+   [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void NegativeLarge()
+        {
+            RomanNumeralGenerator testObject = new RomanNumeralGenerator();
+
+            var actual = testObject.Generate(-4000);
+
+            //Assert Exception
+        }
+
     }
 }
