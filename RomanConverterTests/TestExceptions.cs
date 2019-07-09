@@ -33,6 +33,16 @@ namespace RomanConverterTests
         }
 
     
-        
+         [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TooLargeNumber2()
+        {
+            RomanNumeralGenerator testObject = new RomanNumeralGenerator();
+
+            var actual = testObject.Generate(999000);
+
+            //Assert Exception
+        }
+
     }
 }
